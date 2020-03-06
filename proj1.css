@@ -1,0 +1,14 @@
+.listing {
+    padding: 2rem;
+}
+
+.listing > ul {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    /* grid-gap: 1rem; */
+    list-style: none;
+}
+
+.listing > ul > li {
+    max-width: 250px;
+}
