@@ -7,13 +7,17 @@ BEGIN {
     print "<link rel=\"stylesheet\" href=\"../../main.css\" />"
     print "</head>"
     print "<h1>Music Release Tracker</h1>"
-    print "<p>Type an artist's name to search for.</p>"
 
     split(ENVIRON["QUERY_STRING"], dd, /&/)
     for (i in dd) { split(dd[i], field, /=/); query[field[1]] = field[2] }
 
     # Clean up IDs
     gsub(/%2C/,",",query["ids"])
+    # Remove trailing comma from IDs
+    gsub(/,$/,"",query["ids"])
+    n_artists = split(query["ids"], ids, /,/)
+
+    print "<p>Type an artist's name to search for.</p>"
 
     print "<form method='GET' action='search.cgi'>"
     print "<p>Search for an artist "
@@ -21,13 +25,12 @@ BEGIN {
     print "<input type='hidden' name='ids' value=\""query["ids"]"\"/>"
     print "</form>"
 
+    print "<p>Artists tracked: "n_artists". <a href='manage.cgi?ids="query["ids"]"'>Manage</a></p>"
+
     print "<hr/>"
     print "<h1>Latest Releases</h1>"
     print "<p>Protip: To save your list, just bookmark this page.</p>"
     print "<section class=\"listing\"><ul>"
-    # Remove trailing comma from IDs
-    gsub(/,$/,",0",query["ids"])
-    split(query["ids"], ids, /,/)
     for (i in ids) {
         raw_album_list = raw_album_list "\n" releases(ids[i])
     }
@@ -53,7 +56,7 @@ BEGIN {
         cover = album[4]
 
         # Parse date to a nicer format
-        cmd = "date -d'"reldate"' +'%B %d, %Y'"
+        cmd = "date -d'"reldate"' +'%B %-d, %Y'"
         while (cmd | getline l)
             humandate = l
         close(cmd)
@@ -61,7 +64,7 @@ BEGIN {
         print "<li><img src=\""cover"\" width=\"250\" /></a><br/>\
               <p><strong>"title"</strong></p>\
               <p>"artist"</p>\
-              <p><em>Released "humandate"</em></li>"
+              <p><em>Released "humandate"</em></p><br/></li>"
     }
     print "</ul></section>"
 }
