@@ -24,13 +24,7 @@ BEGIN {
 func dz_artist_search(artist,  resp, results, result) {
     # Get API response from Deezer
     gsub(/'/, "\\'", artist)
-    cmd = "curl -s 'http://api.deezer.com/search/artist?q="artist"' > /tmp/iah13_resp.out"
-    while (cmd | getline l) 
-        resp = resp l
-    close(cmd)
-
-    # Parse through results
-    cmd = "cat /tmp/iah13_resp.out | jq -r '.data[] | \
+    cmd = "curl -s 'http://api.deezer.com/search/artist?q="artist"' | jq -r '.data[] | \
         (.id|tostring) + \"|\" + .name + \"|\" + .picture_medium'"
     num_res = 0
     while (cmd | getline l) {
@@ -38,7 +32,6 @@ func dz_artist_search(artist,  resp, results, result) {
         num_res++
     }
     close(cmd)
-    system("rm /tmp/iah13_resp.out")
 
     # Print results
     print "<section class=\"listing\"><ul>"

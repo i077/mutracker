@@ -71,21 +71,16 @@ BEGIN {
 
 func releases(artist,  ar_resp, al_resp, artist_name, albums) {
     # Get artist name
-    cmd = "curl -s http://api.deezer.com/artist/"artist" > /tmp/iah13_resp.out"
-    system(cmd)
-    cmd = "cat /tmp/iah13_resp.out | jq -r .name"
+    cmd = "curl -s http://api.deezer.com/artist/"artist" | jq -r .name"
     cmd | getline artist_name
     close(cmd)
-    system("rm /tmp/iah13_resp.out")
 
     # Get albums for this artist
-    cmd = "curl -s http://api.deezer.com/artist/"artist"/albums > /tmp/iah13_resp.out"
-    system(cmd)
-    cmd = "cat /tmp/iah13_resp.out | jq -r '.data[] | \
-        .release_date + \"|\" + .title + \"|\" + \""artist_name"\" + \"|\" + .cover_big'"
+    cmd = "curl -s http://api.deezer.com/artist/"artist"/albums | jq -r '.data[] | \
+        .release_date + \"|\" + .title + \"|"artist_name"|\" + .cover_big'"
     while (cmd | getline l)
-        albums = l "\n" albums
-    system("rm /tmp/iah13_resp.out")
+        albums = albums "\n" l
+    close(cmd)
     return substr(albums, 1, length(albums)-1)
 }
 
