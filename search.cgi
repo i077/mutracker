@@ -4,7 +4,7 @@ BEGIN {
     print "<head>"
     print "<title>Music Release Tracker</title>"
     print "<meta charset=\"UTF-8\">"
-    print "<link rel=\"stylesheet\" href=\"../../proj1.css\" />"
+    print "<link rel=\"stylesheet\" href=\"../../main.css\" />"
     print "</head>"
 
     split(ENVIRON["QUERY_STRING"], dd, /&/)
