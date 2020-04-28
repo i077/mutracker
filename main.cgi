@@ -17,15 +17,14 @@ BEGIN {
     gsub(/,$/,"",query["ids"])
     n_artists = split(query["ids"], ids, /,/)
 
-    print "<p>Type an artist's name to search for.</p>"
-
     print "<form method='GET' action='search.cgi'>"
-    print "<p>Search for an artist "
-    print "<input name='artist_q'/> <input type='submit' value='Search'/></p>"
+    print "<p>Follow a new artist: "
+    print "<input name='artist_q' autocomplete='off'/> <input type='submit' value='Search'/></p>"
     print "<input type='hidden' name='ids' value=\""query["ids"]"\"/>"
     print "</form>"
 
-    print "<p>Artists tracked: "n_artists". <a href='manage.cgi?ids="query["ids"]"'>Manage</a></p>"
+    print "<p>Artists you're following: "n_artists". \
+          <a href='manage.cgi?ids="query["ids"]"'>Manage</a></p>"
 
     print "<hr/>"
     print "<h1>Latest Releases</h1>"

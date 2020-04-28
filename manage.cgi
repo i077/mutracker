@@ -6,9 +6,10 @@ BEGIN {
     print "<meta charset=\"UTF-8\">"
     print "<link rel=\"stylesheet\" href=\"../../main.css\" />"
     print "</head>"
-    print "<h1>Manage artists</h1>"
-    print "<p>To remove an artist from your list, click on them. Otherwise, go back.</p>"
-    print "<p>To remove everything and start over, click <a href='main.cgi'>here</a>.</p>"
+    print "<h1>Remove an artist</h1>"
+    print "<p>To unfollow an arist, click on them. \
+             To unfollow everyone and start over, click <a href='main.cgi'>here</a>.</p>"
+    print "Otherwise, go back to keep your list as is."
 
     split(ENVIRON["QUERY_STRING"], dd, /&/)
     for (i in dd) { split(dd[i], field, /=/); query[field[1]] = field[2] }

@@ -14,7 +14,7 @@ BEGIN {
     gsub(/%2C/,",",query["ids"])
 
     print "<h1>Results for '"query["artist_q"]"'</h1>"
-    print "<p>Click an artist name to add it to your list of artists.</p>"
+    print "<p>Click an artist name to follow them.</p>"
     print "<br/>"
     dz_artist_search(query["artist_q"])
 }
@@ -40,7 +40,7 @@ func dz_artist_search(artist,  resp, results, result) {
         id = result[1]
         name = result[2]
         pic = result[3]
-        print "<li><a href=\"main.cgi?ids="id","query["ids"]"\"><img src="pic" width=\"200\" /></a><br/><p>"name"</p></li>"
+        print "<li><a href=\"main.cgi?ids="id","query["ids"]"\"><img src="pic" width=\"200\" /></a><br/><p>"name"</p><br/></li>"
     }
     print "</ul></section>"
 }
