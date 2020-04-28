@@ -53,6 +53,7 @@ BEGIN {
         title = album[2]
         artist = album[3]
         cover = album[4]
+        id = album[5]
 
         # Parse date to a nicer format
         cmd = "date -d'"reldate"' +'%B %-d, %Y'"
@@ -60,7 +61,7 @@ BEGIN {
             humandate = l
         close(cmd)
 
-        print "<li><img src=\""cover"\" width=\"250\" /></a><br/>\
+        print "<li><a href='album_details.cgi?id="id"' ><img src=\""cover"\" width=\"250\" /></a><br/>\
               <p><strong>"title"</strong></p>\
               <p>"artist"</p>\
               <p><em>Released "humandate"</em></p><br/></li>"
@@ -76,7 +77,7 @@ func releases(artist,  ar_resp, al_resp, artist_name, albums) {
 
     # Get albums for this artist
     cmd = "curl -s http://api.deezer.com/artist/"artist"/albums | jq -r '.data[] | \
-        .release_date + \"|\" + .title + \"|"artist_name"|\" + .cover_big'"
+        .release_date + \"|\" + .title + \"|"artist_name"|\" + .cover_big + \"|\" + (.id|tostring) '"
     while (cmd | getline l)
         albums = albums "\n" l
     close(cmd)
