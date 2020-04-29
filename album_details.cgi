@@ -4,6 +4,7 @@ BEGIN {
     print "<head>"
     print "<title>Album Details</title>"
     print "<meta charset=\"UTF-8\">"
+    print "<body>"
 
     split(ENVIRON["QUERY_STRING"], dd, /&/)
     for (i in dd) { split(dd[i], field, /=/); query[field[1]] = field[2] }
@@ -43,6 +44,7 @@ BEGIN {
         }
     }
     print "</ol>"
+    print "</body>"
 }
 
 func get_details(album_id,  album_name, genres, tracks){

@@ -6,6 +6,7 @@ BEGIN {
     print "<meta charset=\"UTF-8\">"
     print "<link rel=\"stylesheet\" href=\"../../main.css\" />"
     print "</head>"
+    print "<body>"
     print "<h1>Remove an artist</h1>"
     print "<p>To unfollow an arist, click on them. \
              To unfollow everyone and start over, click <a href='main.cgi'>here</a>.</p>"
@@ -31,6 +32,7 @@ BEGIN {
         artist_remove_entry(ids[i], removed_id)
     }
     print "</ul></section>"
+    print "</body>"
 }
 
 func artist_remove_entry(artist, removed_id,  artist_data, result) {
