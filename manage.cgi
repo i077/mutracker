@@ -4,13 +4,16 @@ BEGIN {
     print "<head>"
     print "<title>Manage artists</title>"
     print "<meta charset=\"UTF-8\">"
+    print "<link rel=\"stylesheet\" href=\"https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css\" integrity=\"sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh\" crossorigin=\"anonymous\">"
     print "<link rel=\"stylesheet\" href=\"../../main.css\" />"
     print "</head>"
     print "<body>"
+    print "<div class=\"ls\">"
     print "<h1>Remove an artist</h1>"
     print "<p>To unfollow an arist, click on them. \
              To unfollow everyone and start over, click <a href='main.cgi'>here</a>.</p>"
     print "Otherwise, go back to keep your list as is."
+    print"</div>"
 
     split(ENVIRON["QUERY_STRING"], dd, /&/)
     for (i in dd) { split(dd[i], field, /=/); query[field[1]] = field[2] }
@@ -49,4 +52,5 @@ func artist_remove_entry(artist, removed_id,  artist_data, result) {
     pic = result[2]
     print "<li><a href=\"main.cgi?ids="removed_id"\"><img src="pic" width=\"200\" /></a><br/><p>"name"</p><br/></li>"
 }
+
 # vim: set ft=awk:

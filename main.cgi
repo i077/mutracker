@@ -8,8 +8,8 @@ BEGIN {
     print "<link rel=\"stylesheet\" href=\"https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css\" integrity=\"sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh\" crossorigin=\"anonymous\">"
     print "<link rel=\"stylesheet\" href=\"../../main.css\" />"
     print "</head>"
-
     print "<body>"
+    print "<div class=\"ls\">"
     print "<h1>Music Release Tracker</h1>"
 
     split(ENVIRON["QUERY_STRING"], dd, /&/)
@@ -29,11 +29,14 @@ BEGIN {
 
     print "<p>Artists you're following: "n_artists". \
           <a href='manage.cgi?ids="query["ids"]"'>Manage</a></p>"
-
+    print "</div>"          
     print "<hr/>"
+    print "<div class=\"ls\">"
     print "<h1>Latest Releases</h1>"
     print "<p>Protip: To save your list, just bookmark this page.</p>"
+    print "</div>"
     print "<section class=\"listing\"><ul>"
+
     for (i in ids) {
         raw_album_list = raw_album_list "\n" releases(ids[i])
     }
