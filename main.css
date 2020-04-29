@@ -11,3 +11,42 @@
 .listing > ul > li {
     max-width: 250px;
 }
+
+.left{
+	float: left;
+}
+
+.albuminfo{
+	padding-top: 16px;
+}
+
+img{
+	border-radius: 3%;
+}
+.ls{
+	padding-left: 36px;
+}
+.right{
+	float: right;
+	padding-right: 16px;
+	content: "";
+ 	clear: both;
+  	display: table;
+}
+
+.alleft{
+	text-align: left;
+}
+.alright{
+	text-align: right;
+}
+.twocol{
+	columns: 2;
+	-webkit-columns: 2;
+	-moz-columns: 2;
+}
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
